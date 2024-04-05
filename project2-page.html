@@ -23,6 +23,27 @@
   left: 20px;
   z-index: 2;
         }
+
+/* Add CSS to style the code container */
+.code-container {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Enable horizontal scroll if needed */
+}
+
+/* Optional: Add CSS to style the code within the container */
+.code-container pre {
+    margin: 0;
+    padding: 0;
+}
+
+.code-container code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
     </style>
 </head>
 
@@ -53,43 +74,133 @@
                         <p>Getting too tired from searching for jobs manually and going around Perth CBD to give people my resume during my first summmer break in Australia, I developed a jobs scraping bot to automate the process of looking for jobs and internships</p>
                         <p>This project help me applied the theoretical knowledge that I learned from the Pyhton unit(CITS1401) at UWA during my first semester into practical tools.</p>
                         <p></p>
-                        <h3>The Game's Rules</h3>
-                        <p>Arena:</p>
-                        <ul>
-                            <li>Dimension: 6x7 (meters)</li>
-                            <li>Surrounded by a 30 centimeters high barrier</li>
-                            <li>Includes:<ul>
-                                <li>1 Parking area</li>
-                                <li>1 Cylindrical storage area: 1.80 meters tall</li>
-                                <li>4 Corner-storage areas</li>
-                                <li>Driving area</li>
-                            </ul></li>
-                        </ul>
-                        <p>Objective: Shoot as much balls inside the cylindrical storage as possible</p>
-                        <h3>Mechanic</h3>
-                        <p>The Drive-base:</p>
-                        <p>a. Basic idea</p>
-                        <ul>
-                            <li>2 motors with wheels at the back of the robot</li>
-                            <li>2 Ball-bearing universal wheels mounted to the front of the robot</li>
-                        </ul>
-                        <p>b. Advantages</p>
-                        <ul>
-                            <li>Reduce the number of motors, therefore, more motors could be used on other mechanism</li>
-                            <li>Less motors meaning simplier code</li>
-                        </ul>
-                        <p>c. Disadvantages</p>
-                        <ul>
-                            <li>Sometimes the 2 ball-bearing wheels don't create enough friction with the arena's floor making the bot slip a pretty wide margin when turned</li>
-                            <li>The two ball-bearing wheels are to light while the two motors are to heavy, causing the center of gravity of the bot to not be in the middle. This could cause the bot to fall after when mounted others mechanism on</li>
-                        </ul>
-                        <p>The Intake Mechanism:</p>
-                        <p>The first part: getting the balls inside the robot</p>
-                        <ul>
-                            <li>Inspire by the efficiency of leaf-collecting cars on the street in Vietnam, we came up with the idea of straping a large number of cable tie on to rod which then spin to push the balls in similar the spinning brush of a vacumn robot</li>
-                            <li>We decided to make 2 of these cable zip brush, one at the bottom with a bigger cable zip to push the ball up and one on top with smaller cable zip to catch the balls and get them inside the container area of the robot</li>
-                        </ul>
-                        <p>The second part: moving the balls from the container to the shooter part</p>
+                        <h3>Overview</h3>
+                        <p>The simple script use BeautifulSoup and requests module to gather information includes: job's title, position, company's name, location, salary, level and links to the jobs all store within a csv file and use regex module to filter out texts from raw html code</p>
+                        <h4>Importing relevant libraries:</h4>
+                        <div class="code-container">
+                            <pre>
+                                <code class="language-python">
+#import relevant module
+import csv
+from datetime import datetime
+from bs4 import BeautifulSoup
+import requests
+import re
+lst_links = []
+lst_name = []
+lst_company = []
+big_lst = []
+lst_location = []
+lst_position = []
+lst_salary = []
+lst_level = []
+                                </code>
+                            </pre>
+                        </div>
+
+                        <h4>Defines the main function and interacting with the web:</h4>
+                        <div class="code-container">
+                            <pre>
+                                <code>
+#interacting with the web
+def extract(url):
+    #extract raw html
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    cards = soup.find_all('div', 'y735df0 _1iz8dgs4y _1iz8dgs4w')
+                                </code>
+                            </pre>
+                        </div>
+
+                        <h4>Extracting data from each job card and storing them in respective lists:</h4>
+                        <p>Noted that from this point every piece of code will be within the main function</p>
+                        <div class="code-container">
+                            <pre>
+                                <code>
+    for i in lst_links:
+        jobs_rep = requests.get(i)
+        jobs_soup = BeautifulSoup(jobs_rep.text, 'html.parser')
+        jobs_name = jobs_soup.find_all('div', 'y735df0 _1iz8dgs6q _1iz8dgs6v')
+        jobs_company = jobs_soup.find_all('span', 'y735df0 _1iz8dgs4y _94v4w0 _94v4w1 _94v4w21 _1wzghjf4 _94v4wd') 
+        jobs_location = jobs_soup.find('span', 'y735df0 _1iz8dgs4y _1iz8dgsr')
+        jobs_position = jobs_location.find_next('span', 'y735df0 _1iz8dgs4y _1iz8dgsr')
+        jobs_level = jobs_position.find_next('span', 'y735df0 _1iz8dgs4y _1iz8dgsr')
+        jobs_salary = jobs_level.find_next('span', 'y735df0 _1iz8dgs4y _1iz8dgsr') 
+                                    
+        for name in jobs_name:
+            name = name.h1
+            if name != None:
+                match = re.search(r">([^<]*)<", str(name))
+                name = match.group(1)
+                lst_name.append(name)
+
+        for company in jobs_company:
+            if company != None:
+                if company.find('a') != None:
+                    match = re.search(r">([^<]*)</a", str(company))
+                    company = match.group(1)
+                else:
+                    match = re.search(r">([^<]*)<", str(company))
+                    company = match.group(1)
+            lst_company.append(company)
+
+        for location in jobs_location:
+            if location != None:
+                lst_location.append(location)
+
+        for position in jobs_position:
+            lst_position.append(position)
+
+        for level in jobs_level:
+            lst_level.append(level)
+                                        
+        big_lst.append(jobs_salary)
+    for i in big_lst:
+        if i != None:
+            match = re.search(r">([^<]*)<", str(i))
+            i = match.group(1)
+            lst_salary.append(i)
+        else:
+            lst_salary.append("None")
+                                </code>
+                            </pre>
+                        </div>
+
+                        <h4>Using recursion to go to the next page:</h4>
+                        <div class="code-container">
+                            <pre>
+                                <code>
+    #going to the next pages
+    next_card = soup.find_all('li', 'y735df0 _1iz8dgsa6 _1iz8dgs9v _1iz8dgsw')
+    for n_link in next_card:
+        n_link = n_link.find('a').get('href')
+        if n_link != None:
+            return extract("https://www.seek.com.au"+str(n_link))
+        else: 
+            break
+                                </code>
+                            </pre>
+                        </div>
+
+                        <h4>Run the function and import all data into a CSV file:</h4>
+                        <p>The piece of code from this point is outside the main(extract) function.</p>
+                        <div class="code-container">
+                            <pre>
+                                <code>
+extract("https://www.seek.com.au/jobs-in-engineering/in-Northern-QLD")
+#import all data into a spread sheet
+with open('test.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    
+    # Write header row
+    writer.writerow(["Name", "Company", "Position", "Location", "Salary", "Level", "Link to jobs"])
+    
+    # Write data rows
+    for data in zip(lst_name, lst_company, lst_position, lst_location, lst_salary, lst_level, lst_links):
+        writer.writerow(data)
+                                </code>
+                            </pre>
+                        </div>
                     </div>
 
                     <div class="col-12 col-md-3 offset-md-1 meta">

@@ -12,17 +12,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
     <style>
-        .layer1 {
+.layer1 {
   position: relative;
   z-index: 1;
-        }
+}
 
-        .layer2 {
+.layer2 {
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 2;
-        }
+}
+.img{
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+    width: 70%; 
+    height: auto;
+}
     </style>
 </head>
 
@@ -82,10 +89,11 @@
                             <li>2 motors with wheels at the back of the robot</li>
                             <li>2 Ball-bearing universal wheels mounted to the front of the robot</li>
                         </ul>
-                        <img src="assets\project_1\Picture1.PNG" style="width: 60%;height: auto;">
-                        <p style="margin-left: 20%;">Top view</p>
-                        <img src="assets\project_1\Picture2.PNG" style="width: 60%;height: auto;">
-                        <p style="margin-left: 20%;">Side view</p>
+                        <p style="text-align: center;">Top view</p>
+                        <img class="img" src="assets\project_1\Picture1.PNG">
+                        <br>
+                        <p style="text-align: center;">Side view</p>
+                        <img class="img" src="assets\project_1\Picture2.PNG">
                         <p>b. Advantages</p>
                         <ul>
                             <li>Reduce the number of motors, therefore, more motors could be used on other mechanism</li>
@@ -102,6 +110,9 @@
                             <li>Inspire by the efficiency of leaf-collecting cars on the street in Vietnam, we came up with the idea of straping a large number of cable tie on to rod which then spin to push the balls in similar the spinning brush of a vacumn robot.</li>
                             <li>We decided to make 2 of these cable zip brush, one at the bottom with a bigger cable zip to push the ball up and one on top with smaller cable zip to catch the balls and get them inside the container area of the robot.</li>
                         </ul>
+                        <img class="img" src="assets\project_1\Picture3.png">
+                        <img class="img" src="assets\project_1\Picture4.png">
+                        <br>
                         <p>b. The second part: moving the balls from the container to the shooter part:</p>
                         <ul>
                             <li>Due to the limitation on number of motors, we decided to make the balls containers 20cm above the ground, then make a ramp to direct the ball to fall down below the shooter.</li>
@@ -111,8 +122,17 @@
                         <p>a. Basic idea</p>
                         <ul>
                             <li>First we created a rectangular prism frame to house 4 wheels, one motor and all of the pulley system.</li>
+                            <br>
+                            <img class="img" src="assets\project_1\Picture5.png">
+                            <br>
                             <li>Then, inside of the rectangular frame, we made a cylindrical frame with the radius slightly bigger than the radius of the ball. This frame serve the purspose of keeping the balls moving on the right track, avoiding boucing around. We decided to make this inside frame out of metal net so that projectiles of the balls are transparent, making it easier to make adjustment and maintainance.</li>
+                            <br>
+                            <img class="img" src="assets\project_1\Picture6.png">
+                            <br>
                             <li>For the pulley system to shoot the ball, we dediced to have 3 nodes of wheels: the first node this to bring the balls from the base up into the frame and give it some initial velicity so it can reach the second and third node; the second and third node are at the same height and rotating at opposite direction to create pressure that shoot the balls upward.</li>
+                           <br>
+                            <img class="img" src="assets\project_1\Picture7.png">
+
                         </ul>
                         <p>b. Advantages</p>
                         <ul>
@@ -125,12 +145,15 @@
                             <li>Due to the fixed angle of the shooter, the robot need to be placed in a very specific distance and position to the target in order to accuratly deliver the balls. If the position placed is not the sweet spot, we can lose alot of balls because of miss-shooting, which was exactly what happened during the competion.</li>
                         </ul>
                         <h3>Coding</h3>
+                        <p>Controller programming</p>
+                        <img class="img" src="assets\project_1\Picture12.png">
+                        <br>
                         <p>Importing libraries for the PS2 controller and servos:</p>
                         <img src="assets\project_1\Picture13.png" style="width: 100%;height: auto;">
                         <br><br>
                         <p>Creating multiple define functions for each part of the robot for future debugging:</p>
                         <img src="assets\project_1\Picture14.png" style="width: 50%;height: auto;">
-                        <img src="assets\project_1\Picture15.png" style="width: 50%;height: auto;">
+                        <img src="assets\project_1\Picture16.png" style="width: 50%;height: auto;">
                         <br><br>
                         <p>Function for controlling the motors</p>
                         <img src="assets\project_1\Picture17.png" style="width: 50%;height: auto;">

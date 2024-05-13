@@ -77,6 +77,7 @@
                         <h3>Overview</h3>
                         <p>The simple script use BeautifulSoup and requests module to gather information includes: job's title, position, company's name, location, salary, level and links to the jobs all store within a csv file and use regex module to filter out texts from raw html code. All resources are on my github: <a href="https://github.com/namhai2307/Automated-jobs-scraping-bot">https://github.com/namhai2307/Automated-jobs-scraping-bot</a>.</p>
                         <p><b>Scope:</b> Automatically gather jobs description and store them in an excel file so I can browse in one go instead of manually clicking on every single one.</p>
+                        <p>Result preview: <a href="assets\project_2\data_set_1.csv">List of electrical engineering jobs</a></p>
                         <h5>Importing relevant libraries:</h5>
                         <div class="code-container">
                             <pre>
@@ -204,8 +205,10 @@ with open('test.csv', 'w', newline='') as file:
                         </div>
 
                         <h5>Result:</h5>
-                        <p>The first data set collect all electrical engineering jobs accross Perth WA</p>
+                        <p>The first data set collect all electrical engineering jobs accross Perth WA:</p>
                         <a href="assets\project_2\data_set_1.csv">Link to the excel file</a>
+                        <p>For some reason, the data from each column does not match each other starting from page 2. This bug might be due to how the bot seperatly collect each set of data, causing different length of data list when one job does not contain every pieces of data. This will be fixed on data set 2.</p>
+                        <p>Discussion: for some reason, after the first or second page, data from each column does match each other. This bug could be the result of missing information from the hiring pages, causing the difference in length among the data lists</p>
                     </div>
 
                     <div class="col-12 col-md-3 offset-md-1 meta">

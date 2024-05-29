@@ -1,0 +1,12 @@
+.certbox {
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #888888; /* Horizontal offset, vertical offset, blur radius, shadow color */
+    width: 100%; /* Ensures the image fits within its container */
+    transition: transform 0.3s ease; /* Smooth transition for the scaling effect */
+    border-radius: 15px;
+}
+
+.certbox:hover {
+    transform: scale(1.1); /* Scales the image up by 10% on hover */
+}
+

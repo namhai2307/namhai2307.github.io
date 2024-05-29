@@ -19,7 +19,7 @@
         width: 100%; /* Ensures the image fits within its container */
         transition: transform 0.3s ease; /* Smooth transition for the scaling effect */
         border-radius: 15px;
-        width: 70%;
+        width: 60%;
         height:auto
     }
 

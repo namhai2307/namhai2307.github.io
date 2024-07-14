@@ -46,50 +46,55 @@
                 <div class="heading">
                     <h2>Make X Robotics Competition 2024</h2>
                 </div>
-                <div class="image" style="background-image:url(&quot;assets/img/tech/rian.jpg&quot;);"></div>
+                <div class="image" style="background-image:url(&quot;assets/img/tech/makex.jpg&quot;);"></div> 
                 <div class="row">
                     <div class="col-12 col-md-6 offset-md-1 info">
                         <h3>Description</h3>
-                        <p>The Technical Notebook chronicles Robots in a Nutshell's journey in designing, brainstorming, and building robots. It features images and ideas developed during the competition strategy phase, reflecting extensive research and application of high school curriculum.</p>
-                        <p>Comprising young enthusiasts, me and my team aspires to share their passion for robotics and contribute knowledge gained from the Vietnam Robotics Challenge (VRC). Despite their youthful vigor and limited experience, some mistakes inevitably occurred in the robot creation process.</p>
+                        <p>My first robotics related paying job in Australia. Through the Engineering for kids organizations, I was able to connect and participate in the Make X robotics competition as a mentor for a 11 grade student.</p>
+                        <p>.</p>
                         <p>Skills learned:</p>
                         <ul>
-                            <li>Basic knowledge of mechanical designing process.</li>
-                            <li>Intermediate understading of electrical circuits and embedded software programming.</li>
-                            <li>Leadership, teamworking and basic management(time, budget, resources and milestones).</li>
+                            <li>Intermediate CAD. Gained proficient in SolidWorks sketching, extrusion and entry level motion study.</li>
+                            <li>Proficient in Python programming for hardware control.</li>
+                            <li>Mentoring and communication.</li>
                         </ul>
-                        <h3>The Game's Rules</h3>
+                        <h3>The Game's Rules <a href="assets\project_3\【English】2024-MakeX-Challenge-Ultimate-Winner-Rules-Guide-V1.0.pdf" target="_blank">(Download the PDF file)</a></h3>
                         <p>Arena:</p>
                         <ul>
-                            <li>Dimension: 6x7 (meters)</li>
-                            <li>Surrounded by a 30 centimeters high barrier</li>
+                            <li>Dimension: 4.6x3.0 (meters)</li>
+                            <li>Surrounded by a 40 centimeters high barrier</li>
                             <li>Includes:<ul>
-                                <li>1 Parking area</li>
-                                <li>1 Cylindrical storage area: 1.80 meters tall</li>
-                                <li>4 Corner-storage areas</li>
-                                <li>Driving area</li>
-                            <img src="assets\project_1\san dau.jpg" alt="diagram of the field" style="width: 90%;height: 90%;">
-                            <p>The platform diagram</p>
-                            <img src="assets\project_1\san real.jpg" alt="the field from the top view" style="width: 90%;height: 90%;">
-                            <p>The real platform from the top view</p>
+                                <li>2 Starting area on each side (2v2)</li>
+                                <li>Disc area</li>
+                                <li>Main resource area: cube and shelf</li>
+                                <li>Other resource areas(less score)</li>
+                            <img src="assets\project_3\Picture1.jpeg" alt="diagram of the field" style="width: 90%;height: 90%;">
+                            <p>The platform from the top view</p>
+                            <img src="assets\project_3\Picture2.jpeg" alt="the field from the top view" style="width: 90%;height: 90%;">
+                            <p>Main resource area</p>
                             </ul></li>
                         </ul>
-                        <p>Objective: Shoot as much balls inside the cylindrical storage as possible</p>
+                        <p>Objective (simplified):</p>
+                        <ul>
+                            <li>Shoot red/blue disc into the storage area to gain point, shoot blue/red disc into the panel to knock it over the the other side</li>
+                            <li>Move boxes from a shelf to a different shelf with different height to create the word "MAKEX"</li>
+                        </ul>
                         <h3>Mechanic</h3>
                         <p><b>Drive-base:</b></p>
                         <p>a. Basic idea</p>
                         <ul>
-                            <li>2 motors with wheels at the back of the robot</li>
-                            <li>2 Ball-bearing universal wheels mounted to the front of the robot</li>
+                            <li>4 motors at 4 corners of the robot</li>
+                            <li>Each motor is equiped with mechanum wheel, allowing the robot to move sideway</li>
                         </ul>
-                        <img src="assets\project_1\Picture1.PNG" style="width: 60%;height: auto;">
-                        <p style="margin-left: 20%;">Top view</p>
-                        <img src="assets\project_1\Picture2.PNG" style="width: 60%;height: auto;">
-                        <p style="margin-left: 20%;">Side view</p>
+                        <img src="assets\project_3\drivebase1.jpg" style="width: 60%;height: auto;">
+                        <p style="margin-left: 20%;">Front wheels</p>
+                        <img src="assets\project_3\drivebase2.jpg" style="width: 60%;height: auto;">
+                        <p style="margin-left: 20%;">Back wheels</p>
+                        <video controls autoplay loop><source src = "assets\project_3\drivebase test.mp4" type = "video/mp4"></video>
                         <p>b. Advantages</p>
                         <ul>
-                            <li>Reduce the number of motors, therefore, more motors could be used on other mechanism</li>
-                            <li>Less motors meaning simplier code</li>
+                            <li>Ability to move back and forth, and sideway give drivers better control over the position of the robot</li>
+                            <li>Provide more flexible and agility even when one of the motor stop working compared to traditional wheels</li>
                         </ul>
                         <p>c. Disadvantages</p>
                         <ul>
@@ -97,12 +102,12 @@
                             <li>The two ball-bearing wheels are to light while the two motors are to heavy, causing the center of gravity of the bot to not be in the middle. This could cause the bot to fall after when mounted others mechanism on</li>
                         </ul>
                         <p><b>Intake Mechanism:</b></p>
-                        <p>a. The first part: getting the balls inside the robot</p>
+                        <p>a. First part: bring the disces inside the robot</p>
                         <ul>
                             <li>Inspire by the efficiency of leaf-collecting cars on the street in Vietnam, we came up with the idea of straping a large number of cable tie on to rod which then spin to push the balls in similar the spinning brush of a vacumn robot.</li>
                             <li>We decided to make 2 of these cable zip brush, one at the bottom with a bigger cable zip to push the ball up and one on top with smaller cable zip to catch the balls and get them inside the container area of the robot.</li>
                         </ul>
-                        <p>b. The second part: moving the balls from the container to the shooter part:</p>
+                        <p>b. Second part: moving the balls from the container to the shooter part:</p>
                         <ul>
                             <li>Due to the limitation on number of motors, we decided to make the balls containers 20cm above the ground, then make a ramp to direct the ball to fall down below the shooter.</li>
                         </ul>
@@ -146,7 +151,7 @@
                     </div>
 
                     <div class="col-12 col-md-3 offset-md-1 meta">
-                        <div class="tags"><span class="meta-heading">Tags</span><a href="https://www.facebook.com/vietnam.robotics.challenge" target="_blank">Resource</a><a href="#">Project</a><span class="meta-heading">Date</span><span>15-07-2023</span></div>
+                        <div class="tags"><span class="meta-heading">Tags</span><a href="https://www.makex.cc/en/2024-makex" target="_blank">Resource</a><a href="#">Project</a><span class="meta-heading">Date</span><span>28-07-2024</span></div>
                     </div>
                 </div>
                 <div class="more-projects">

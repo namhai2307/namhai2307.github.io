@@ -51,7 +51,7 @@
                     <div class="col-12 col-md-6 offset-md-1 info">
                         <h3>Description</h3>
                         <p>My first robotics related paying job in Australia. Through the Engineering for kids organizations, I was able to connect and participate in the Make X robotics competition as a mentor for a 11 grade student.</p>
-                        <p>.</p>
+                        <img src="assets\project_3\prize.jpg" style="width: 50%;height: auto;">
                         <p>Skills learned:</p>
                         <ul>
                             <li>Intermediate CAD.</li>
@@ -79,7 +79,7 @@
                             <li>Shoot red/blue disc into the storage area to gain point, shoot blue/red disc into the panel to knock it over the the other side</li>
                             <li>Move boxes from a shelf to a different shelf with different height to create the word "MAKEX"</li>
                         </ul>
-                        <h3>Mechanic</h3>
+                        <h3>Mechanics</h3>
                         <p><b>Drive-base:</b></p>
                         <p>a. Basic idea</p>
                         <ul>
@@ -90,7 +90,10 @@
                         <p style="margin-left: 20%;">Front wheels</p>
                         <img src="assets\project_3\drivebase2.jpg" style="width: 60%;height: auto;">
                         <p style="margin-left: 20%;">Back wheels</p>
-                        <video width = 500px controls autoplay loop><source src = "assets\project_3\drivebase.mov" type = "video/mp4"></video>
+                        <video width = 500px controls autoplay loop>
+                            <source src = "assets\project_3\drivebase.mov" type = "video/mov">
+                            <source src = "assets\project_3\drivebase.mp4" type = "video/mp4">
+                        </video>
                         <p>b. Advantages</p>
                         <ul>
                             <li>Ability to move back and forth, and sideway give drivers better control over the position of the robot</li>
@@ -105,50 +108,40 @@
                         <p><b>Intake Mechanism:</b></p>
                         <p>a. First part: Disc</p>
                         <ul>
-                            <li>Taking inspiration from my previous project, the intake system utilize spining ziptie for both range and friction. .</li>
-                            <li>We decided to make 2 of these cable zip brush, one at the bottom with a bigger cable zip to push the ball up and one on top with smaller cable zip to catch the balls and get them inside the container area of the robot.</li>
+                            <li>Taking inspiration from my previous project, the intake system utilize spining ziptie for both range and friction.</li>
+                            <li>To bring the disc from the ground the shooter system 70cm above the ground, we used a vertical conveyor system that extended from the intake..</li>
+                            <li>Having a 70cm long conveyer system also work as a storage space for 5 disc at a time.</li>
                         </ul>
                         <p>b. Second part: Cube</p>
                         <ul>
-                            <li>Due to the limitation on number of motors, we decided to make the balls containers 20cm above the ground, then make a ramp to direct the ball to fall down below the shooter.</li>
+                            <li>Intake for the cubes is simply a claw with one motor to open and close on one side.</li>
                         </ul>
                         <p><b>Tasks-handling Mechanism:</b></p>
-                        <p>The system was inspire by the <a href="https://www.youtube.com/watch?v=An3xoJgk2uI" target="_blank">Flywheel Shooter from FGC.</a></p>
-                        <p>a. Basic idea</p>
+                        <p>a. For the discs</p>
                         <ul>
-                            <li>First we created a rectangular prism frame to house 4 wheels, one motor and all of the pulley system.</li>
-                            <li>Then, inside of the rectangular frame, we made a cylindrical frame with the radius slightly bigger than the radius of the ball. This frame serve the purspose of keeping the balls moving on the right track, avoiding boucing around. We decided to make this inside frame out of metal net so that projectiles of the balls are transparent, making it easier to make adjustment and maintainance.</li>
-                            <li>For the pulley system to shoot the ball, we dediced to have 3 nodes of wheels: the first node this to bring the balls from the base up into the frame and give it some initial velicity so it can reach the second and third node; the second and third node are at the same height and rotating at opposite direction to create pressure that shoot the balls upward.</li>
+                            <li>For the shooting mechanism: we mount 2 jet motors with ridges wheel for friction. The wheels are placed horizontally, facing each other</li>
+                            <li>A second, horizontal conveyer line bridge the gap between the vertical conveyer and the shooting mechanism.</li>
                         </ul>
-                        <p>b. Advantages</p>
+                        <video width="500px" controls autoplay loop>
+                            <source src = "assets\project_3\disc_shooting.mov" type = "video/mov">
+                            <source src = "assets\project_3\disc_shooting.mp4" type = "video/mp4">
+                        </video>
+                        <p>b. For the cubes</p>
                         <ul>
-                            <li>The system only require one motor to run, which was also the last motor we have due to the limitation from the rules.</li>
-                            <li>Stability is a huge plus point for this system as balls from behind keep pushing balls infront upward, creating a chain reaction that keep shooting the balls out the frame.</li>
-                            <li>Thanks to the lenght of the frame, the robot can shoot up to 8-10 balls at a time, this was also a double-edge blade that I will explain below.</li>
+                            <li>The pulley system used one servo to move everything up and down.</li>
+                            <li>Because to pulley is hooked to one grab claw, only one cube/cone can be moved to the shelf at a time.</li>
                         </ul>
+                        <video width="500px" controls autoplay loop>
+                            <source src = "assets\project_3\pulley.mov" type = "video/mov">
+                            <source src = "assets\project_3\pulley.mp4" type = "video/mp4">
+                        </video>
                         <p>c. Disadvantages</p>
                         <ul>
-                            <li>Due to the fixed angle of the shooter, the robot need to be placed in a very specific distance and position to the target in order to accuratly deliver the balls. If the position placed is not the sweet spot, we can lose alot of balls because of miss-shooting, which was exactly what happened during the competion.</li>
+                            <li>Stability is a huge downside of this design. Because we using ball bearing plastic wheels, the outer plastic piece often get dislocated due to the heavy weight of the pulley, the cube, and the grabbing claw.</li>
+                            <li>We decided to counter this by buying a bunch of plastic bearing wheels so we can replace the dislocated ones during the competition.</li>
                         </ul>
                         <h3>Coding</h3>
-                        <p>Importing libraries for the PS2 controller and servos:</p>
-                        <img src="assets\project_1\Picture13.png" style="width: 100%;height: auto;">
-                        <br><br>
-                        <p>Creating multiple define functions for each part of the robot for future debugging:</p>
-                        <img src="assets\project_1\Picture14.png" style="width: 50%;height: auto;">
-                        <img src="assets\project_1\Picture15.png" style="width: 50%;height: auto;">
-                        <br><br>
-                        <p>Function for controlling the motors</p>
-                        <img src="assets\project_1\Picture17.png" style="width: 50%;height: auto;">
-                        <br><br>
-                        <p>Function for controlling the 180 and 360 servos</p>
-                        <img src="assets\project_1\Picture18.png" style="width: 50%;height: auto;">
-                        <br><br>
-                        <p>The setup function:</p>
-                        <img src="assets\project_1\Picture19.png" style="width: 50%;height: auto;">
-                        <br><br>
-                        <p>The loop function that include every functions above:</p>
-                        <img src="assets\project_1\Picture20.png" style="width: auto;height: 3%;">
+                        <p>Code was writen using block code because we did not have enough development time: <a href = "assets\project_3\code.mblock">Download here</a></p>
                     </div>
 
                     <div class="col-12 col-md-3 offset-md-1 meta">

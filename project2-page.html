@@ -71,31 +71,40 @@
                 <div class="row">
                     <div class="col-12 col-md-6 offset-md-1 info">
                         <h3>Description</h3>
-                        <p>Getting too tired from searching for jobs manually and going around Perth CBD to give people my resume during my first summmer break in Australia, I developed a jobs scraping bot to automate the process of looking for jobs and internships</p>
+                        <p>Getting too tired from searching for jobs manually and going around Perth CBD to give people my resume during my first summmer break in Australia, I developed a jobs scraping bot to automate the process of looking for jobs and internships.</p>
                         <p>This project help me applied the theoretical knowledge that I learned from the Python unit(CITS1401) at UWA during my first semester into practical tools.</p>
                         <p></p>
+                        
                         <h3>Overview</h3>
-                        <p>The simple script use BeautifulSoup and requests module to gather information includes: job's title, position, company's name, location, salary, level and links to the jobs all store within a csv file and use regex module to filter out texts from raw html code. All resources are on my github: <a href="https://github.com/namhai2307/Automated-jobs-scraping-bot">https://github.com/namhai2307/Automated-jobs-scraping-bot</a>.</p>
-                        <p><b>Scope:</b> Automatically gather jobs description and store them in an excel file so I can browse in one go instead of manually clicking on every single one.</p>
-                        <p><b>Result preview:</b> <a href="assets\project_2\data_set_1.csv">List of electrical engineering jobs</a></p>
-                        <h5>Importing relevant libraries:</h5>
+                        <p>The simple script use BeautifulSoup and requests module to gather information includes: job's title, position, company's name, location, salary, level and links to the jobs all store within a csv file. All resources are on my github: <a href="https://github.com/namhai2307/Automated-jobs-scraping-bot">https://github.com/namhai2307/Automated-jobs-scraping-bot</a>.</p>
+                        <p><b>Scope:</b> Automatically gather jobs description and store them in an excel file so I can browse in one go instead of manually clicking on every single one. Use pandas and Matplotlib to perform analysis and visualization on the collected data sheet</p>
+                        <p><b>Result preview:</b> <a href="assets\project_2\data_set_1.csv">List of 550 automation engineering jobs</a></p>
+                        
+                        <h3>Presentation</h3>
+                        <img src= "assets\project_2\graph_1.png" style="height: 350px; width: auto;">
+                        <p>Using Matplotlib to analyze the location data, we can see that according to Seek, NSW is by far, the state with the leading number of automation engineering jobs available.</p>
+                        <img src= "assets\project_2\graph_2.png" style="height: 350px; width: auto;">
+                        <p>Not surprisingly, Sydney have the most automation engineering jobs. The total number of jobs in less major cities was actually greater than that of Perth, Adelaide and Brisbane.</p>
+                        
+                        <h3>The Boring Part:</h3>
+                        <h5>Importing relevant libraries and define the data frame:</h5>
                         <div class="code-container">
                             <pre>
                                 <code class="language-python">
-#import relevant module
-import csv
-from datetime import datetime
-from bs4 import BeautifulSoup
+#importing libraries
+from bs4 import BeautifulSoup, element
 import requests
-import re
-lst_links = []
-lst_name = []
-lst_company = []
-big_lst = []
-lst_location = []
-lst_position = []
-lst_salary = []
-lst_level = []
+import pandas as pd
+#define the data frame
+data = {
+    "links": [],
+    "name": [],
+    "company": [],
+    "location":[],
+    "position": [],
+    "salary": [],
+    "level": []
+        }
                                 </code>
                             </pre>
                         </div>
@@ -104,12 +113,14 @@ lst_level = []
                         <div class="code-container">
                             <pre>
                                 <code>
-#interacting with the web
-def extract(url):
-    #extract raw html
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    cards = soup.find_all('div', 'y735df0 _1iz8dgs4y _1iz8dgs4w')
+def filter(soup, lst):
+    if isinstance(soup, element.Tag):
+        name = soup.text
+        lst.append(name)
+    elif not isinstance(soup, element.Tag):
+        lst.append("N/A")
+    else:
+        lst.append("N/A")
                                 </code>
                             </pre>
                         </div>
@@ -119,92 +130,66 @@ def extract(url):
                         <div class="code-container">
                             <pre>
                                 <code>
-    for i in lst_links:
-        jobs_rep = requests.get(i)
-        jobs_soup = BeautifulSoup(jobs_rep.text, 'html.parser')
-        jobs_name = jobs_soup.find_all('div', 'y735df0 _1iz8dgs6q _1iz8dgs6v')
-        jobs_company = jobs_soup.find_all('span', 'y735df0 _1iz8dgs4y _94v4w0 _94v4w1 _94v4w21 _1wzghjf4 _94v4wd') 
-        jobs_location = jobs_soup.find('span', 'y735df0 _1iz8dgs4y _1iz8dgsr')
-        jobs_position = jobs_location.find_next('span', 'y735df0 _1iz8dgs4y _1iz8dgsr')
-        jobs_level = jobs_position.find_next('span', 'y735df0 _1iz8dgs4y _1iz8dgsr')
-        jobs_salary = jobs_level.find_next('span', 'y735df0 _1iz8dgs4y _1iz8dgsr') 
-                                    
-        for name in jobs_name:
-            name = name.h1
-            if name != None:
-                match = re.search(r">([^<]*)<", str(name))
-                name = match.group(1)
-                lst_name.append(name)
+def extract(url):
+    respone = requests.get(url)
+    soup = BeautifulSoup(respone.text, "html.parser")
+    cards = soup.find_all('div', '_1ungv2r0 _1viagsn4z _1viagsn4x')
 
-        for company in jobs_company:
-            if company != None:
-                if company.find('a') != None:
-                    match = re.search(r">([^<]*)</a", str(company))
-                    company = match.group(1)
-                else:
-                    match = re.search(r">([^<]*)<", str(company))
-                    company = match.group(1)
-            lst_company.append(company)
-
-        for location in jobs_location:
-            if location != None:
-                lst_location.append(location)
-
-        for position in jobs_position:
-            lst_position.append(position)
-
-        for level in jobs_level:
-            lst_level.append(level)
+    for card in cards:
+        link = card.find('a')
+        link = link.get("href")
+        if link != None:
+            data["links"].append("https://www.seek.com.au"+str(link))
+                            
+    #recursion function to go to the next page
+    next_card = soup.find('li', '_1ungv2r0 _1viagsnbb _1viagsnb0 _1viagsnx')
+    while isinstance(next_card, element.Tag):
+        n_link = next_card.find('a').get('href')
+        return extract("https://www.seek.com.au"+str(n_link))
+                                
+    #extract detail data
+    for i in data["links"]:
+        #extract raw html as text format
+        jobs = requests.get(i)
+        jobs_soup = BeautifulSoup(jobs.text, "html.parser")
+                 
+        job_name = jobs_soup.find("h1", attrs={"class": "_1ungv2r0 _1viagsn4z _3h66av0 _3h66avl _1708b944 _3h66avs _3h66av21"})
+        job_company = jobs_soup.find('span', attrs={"class": '_1ungv2r0 _1viagsn4z _1viagsni7 _3h66av0 _3h66av1 _3h66av21 _1708b944 _3h66ava'})
+        job_details = jobs_soup.find_all("div", attrs={"class": "_1ungv2r0 _1viagsn5b _1viagsnh7 _1viagsngr _157hsn62d"})
                                         
-        big_lst.append(jobs_salary)
-    for i in big_lst:
-        if i != None:
-            match = re.search(r">([^<]*)<", str(i))
-            i = match.group(1)
-            lst_salary.append(i)
-        else:
-            lst_salary.append("None")
+        ##
+        filter(job_name, data["name"])
+        ##
+        filter(job_company, data["company"])
+        ##
+        while len(job_details) < 5:
+            job_details.append("N/A")
+        ##
+        filter(job_details[1], data["location"])
+        ##
+        filter(job_details[2], data["position"])
+        ##
+        filter(job_details[3], data["level"])
+        ##
+        filter(job_details[4], data["salary"])
                                 </code>
                             </pre>
                         </div>
 
-                        <h5>Using recursion to go to the next page:</h5>
+                        <h5>Using pandas to import the data frame into a csv file:</h5>
                         <div class="code-container">
                             <pre>
                                 <code>
-    #going to the next pages
-    next_card = soup.find_all('li', 'y735df0 _1iz8dgsa6 _1iz8dgs9v _1iz8dgsw')
-    for n_link in next_card:
-        n_link = n_link.find('a').get('href')
-        if n_link != None:
-            return extract("https://www.seek.com.au"+str(n_link))
-        else: 
-            break
+url = "https://www.seek.com.au/automation-engineer-jobs/in-All-Australia"
+extract(url)
+df = pd.DataFrame(data)
+df
+df.to_csv("job_data2.csv", index = False)
                                 </code>
                             </pre>
                         </div>
 
-                        <h5>Run the function and import all data into a CSV file:</h5>
-                        <p>The piece of code from this point is outside the main(extract) function.</p>
-                        <div class="code-container">
-                            <pre>
-                                <code>
-extract("https://www.seek.com.au/jobs-in-engineering/in-Northern-QLD")
-#import all data into a spread sheet
-with open('test.csv', 'w', newline='') as file:
-    writer = csv.writer(file)
-    
-    # Write header row
-    writer.writerow(["Name", "Company", "Position", "Location", "Salary", "Level", "Link to jobs"])
-    
-    # Write data rows
-    for data in zip(lst_name, lst_company, lst_position, lst_location, lst_salary, lst_level, lst_links):
-        writer.writerow(data)
-                                </code>
-                            </pre>
-                        </div>
-
-                        <h5>Result:</h5>
+                        <h5>Result discussion:</h5>
                         <p>The first data set collect all electrical engineering jobs accross Perth WA:</p>
                         <a href="assets\project_2\data_set_1.csv">Link to the excel file</a>
                         <p>For some reason, the data from each column does not match each other starting from page 2. This bug might be due to how the bot seperatly collect each set of data, causing different length of data list when one job does not contain every pieces of data. This will be fixed on data set 2.</p>

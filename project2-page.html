@@ -126,7 +126,7 @@ def filter(soup, lst):
                         </div>
 
                         <h5>Extracting data from each job card and storing them in respective lists:</h5>
-                        <p>Noted that from this point every piece of code will be within the main function</p>
+                        <p>Noted that the class attribute of tags are changed regulary, you might need to change the class name if you planning to use my code.</p>
                         <div class="code-container">
                             <pre>
                                 <code>
@@ -190,10 +190,10 @@ df.to_csv("job_data2.csv", index = False)
                         </div>
 
                         <h5>Result discussion:</h5>
-                        <p>The first data set collect all electrical engineering jobs accross Perth WA:</p>
-                        <a href="assets\project_2\data_set_1.csv">Link to the excel file</a>
-                        <p>For some reason, the data from each column does not match each other starting from page 2. This bug might be due to how the bot seperatly collect each set of data, causing different length of data list when one job does not contain every pieces of data. This will be fixed on data set 2.</p>
-                        <p>Discussion: for some reason, after the first or second page, data from each column does match each other. This bug could be the result of missing information from the hiring pages, causing the difference in length among the data lists</p>
+                        <p>Comparing the result from the bot to data from Engineers Australia on percentages of engineering jobs by region, I manage to a very close result:</p>
+                        <p> - According to the second graph, approximately 77.7% of engineering jobs were located in the eight capital cities. Similarly, Engineers Australia reported that in June 2024, 77.1% of all engineering job advertisements were concentrated in the state capitals (page 12).</p>
+                        <p> - The total percentages of jobs in NSW, QLD, Victoria and WA shown in the first graph was 89.9%, while Engineers Australia survey showed 88% of jobs in these 4 states combined (page 5).</p>
+                        <p> - Fun fact: Engineers Australia also used Seek to gather data for their survey <a href="https://www.engineersaustralia.org.au/sites/default/files/2024-09/The-Engineering-Labour-Market-Overview-August-24.pdf">citation here</a></p>
                     </div>
 
                     <div class="col-12 col-md-3 offset-md-1 meta">

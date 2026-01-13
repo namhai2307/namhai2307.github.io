@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Project Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="#">TRAN HAI NAM</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects-grid-cards.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hire-me.html">My Journey</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page project-page">
+        <section class="portfolio-block project">
+            <div class="container">
+                <div class="heading">
+                    <h2>Autonomous Sumo Robot</h2>
+                </div>
+                <div class="image" style="background-image:url(&quot;assets/img/tech/sumo_bot_banner.jpg&quot;);"></div>
+                <div class="row">
+                    <div class="col-12 col-md-6 offset-md-1 info">
+                        <h3>Description</h3>
+                        <p>An autonomous sumo robot designed to compete in robotic sumo wrestling competitions. The robot uses multiple sensors to detect opponents and avoid falling off the ring.</p>
+                        <h3>Hardware Components:</h3>
+                        <ul>
+                            <li><strong>ESP32 (TTGO):</strong> Main microcontroller for processing sensor data and controlling motors.</li>
+                            <li><strong>3 Ultrasonic Sensors:</strong> Detect and locate opponents on the sumo ring.</li>
+                            <li><strong>Infrared Sensors:</strong> Positioned at the bottom to detect the edge of the sumo ring and prevent the robot from falling off.</li>
+                            <li><strong>LN298 Motor Driver:</strong> Controls the DC motors for movement and maneuverability.</li>
+                            <li><strong>Lithium Batteries:</strong> Power supply for all components.</li>
+                        </ul>
+                        <img src="assets\project_5\circuit_diagram.jpg" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;">
+                        <h3>Software Architecture:</h3>
+                        <p>Detail code on github: <a href="https://github.com/namhai2307/Sumo-Robot">https://github.com/namhai2307/Sumo-Robot</a></p>
+                        <p>Programmed in C++ using the Arduino framework for ESP32. The software implements a <strong>priority-based control system</strong> with three autonomous behavioral states:</p>
+                        <img src="assets\project_5\priority.png" class="img-fluid" style="width: 100%; max-width: 400px; margin: 20px 0;">
+
+                        <h4 style="margin-top: 15px;">Behavioral States</h4>
+                        <ul>
+                            <li><strong>SEARCH State:</strong> Robot performs randomized turning movements (left/right) every 500-900ms while continuously scanning with ultrasonic sensors to locate opponents.</li>
+                            <li><strong>ATTACK State:</strong> Activated when ultrasonic sensor detects an opponent within 40cm. Robot charges forward or turns toward the opponent depending on sensor position, with response time under 45ms.</li>
+                            <li><strong>RETREAT State:</strong> Highest priority state. When IR sensors detect the black arena edge, robot executes a 3-phase recovery: backing away from edge (300ms), turning toward arena center (400ms), and resuming search.</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 15px;">Control Logic</h4>
+                        <ul>
+                            <li>SEARCH → ATTACK: Opponent detected within 40cm</li>
+                            <li>ATTACK → SEARCH: Opponent moves out of range (&gt;40cm)</li>
+                            <li>Any State → RETREAT: IR sensor detects arena edge (safety override)</li>
+                            <li>RETREAT → SEARCH: Recovery sequence complete</li>
+                        </ul>
+                        <img src="assets\project_5\logic flow.png" class="img-fluid" style="width: 100%; max-width: 600px; margin: 20px 0;">
+
+                        <h3>Result:</h3>
+                        <video width="500px" controls autoplay loop>
+                            <source src = "assets\project_5\showcase.mov" type = "video/mov">
+                            <source src = "assets\project_5\showcase.mp4" type = "video/mp4">
+                        </video>
+                        
+                    </div>
+                    <div class="col-12 col-md-3 offset-md-1 meta">
+                        <div class="tags"><span class="meta-heading">Tags</span><a href="https://github.com/namhai2307/Sumo-Robot">Github</a><a href="#">Project</a><span class="meta-heading">Date</span><span>13-01-2026</span></div>
+                    </div>
+                </div>
+                <div class="more-projects">
+                    <h3 class="text-center">More Projects</h3><img class="img-fluid scale-on-hover" src="assets/img/nature/image2.jpg"><img class="img-fluid scale-on-hover" src="assets/img/nature/image3.jpg"><img class="img-fluid scale-on-hover" src="assets/img/tech/image4.jpg"><img class="img-fluid scale-on-hover" src="assets/img/nature/image5.jpg"><img class="img-fluid scale-on-hover" src="assets/img/nature/image4.jpg">
+                    <div class="row gallery">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a></div>
+            <div class="social-icons"><a href="#"><i class="icon ion-social-linkedin"></i></a></div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

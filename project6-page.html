@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Project Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="#">TRAN HAI NAM</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects-grid-cards.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hire-me.html">My Journey</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page project-page">
+        <section class="portfolio-block project">
+            <div class="container">
+                <div class="heading">
+                    <h2>2026 Weir Warman Competition - Autonomous Transporter Robot</h2>
+                </div>
+                <div class="image" style="background-image:url(&quot;assets/img/tech/obstacle_course.png&quot;); background-position: center 30%;"></div>
+                <div class="row">
+                    <div class="col-12 col-md-6 offset-md-1 info">
+                        <h3>Description</h3>
+                        <p>A fully autonomous material-handling robot built by a team of 4 for the <strong>39th Warman Design &amp; Build Competition 2026 ("Project REEP")</strong>, run by Engineers Australia and sponsored by Weir. The robot must collect six simulated ore rocks from a dump zone, transport them across the course, deposit them into an elevated hopper, and return to the end zone &mdash; all within 120 seconds, from a single button press, with no remote control allowed.</p>
+                        <h3>The Challenge:</h3>
+                        <ul>
+                            <li><strong>Fully autonomous:</strong> One single start action, no wireless/remote control during the run.</li>
+                            <li><strong>Size & weight limit:</strong> The entire system must fit inside a 400 mm cube at the start and weigh under 6 kg.</li>
+                            <li><strong>The task:</strong> Collect six PLA "rocks" (~140 g total) from a 400&times;400 mm dump zone and deposit them into a 100 mm diameter hopper standing 298 mm tall.</li>
+                            <li><strong>Scoring:</strong> Points for collecting, supporting, and depositing rocks, finishing in the end zone, plus a time bonus for a perfect run.</li>
+                        </ul>
+                        <h3>Robot Showcase:</h3>
+                        <video controls loop style="width: 100%; max-width: 500px;">
+                            <source src="assets/project_6/showcase.mp4" type="video/mp4">
+                            Your browser does not support this video.
+                        </video>
+
+                        <h3>Design Overview:</h3>
+                        <p>The robot integrates three main mechanical subsystems, each with its own microcontroller, working together as one distributed system:</p>
+                        <ul>
+                            <li><strong>Mecanum Chassis:</strong> Omnidirectional mobile base for precise positioning.</li>
+                            <li><strong>Scissor Lift:</strong> Raises the arm to the hopper height without relying on the ramp.</li>
+                            <li><strong>5-DOF Mechanical Arm + Scoop:</strong> Sweeps up all six rocks at once and dumps them into the hopper.</li>
+                        </ul>
+
+                        <h3>Mechanical Arm &amp; Scoop:</h3>
+                        <p>A servo-driven arm with <strong>five degrees of freedom</strong> (rotating base, two arm joints, wrist, and scoop) collects all rocks in a single sweeping motion &mdash; far more tolerant to rock placement than a gripper. The arm is built from aluminium side plates joined by 3D-printed mounting blocks, with a cone-shaped scoop that guides rocks in and retains them during transport.</p>
+                        <img src="assets/project_6/arm_scoop.png" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;" alt="Scooper mounted on the robotic arm">
+                        <img src="assets/project_6/arm_dof.png" class="img-fluid" style="width: 100%; max-width: 700px; margin: 20px 0;" alt="CAD renders of the arm degrees of freedom">
+                        <p>Arm motion is organised into <strong>motion frames and groups</strong>: each frame stores target positions for all five servos, and groups are played back step-by-step on trigger signals, keeping the arm synchronised with the chassis and lift. A web interface allows manual servo control and motion recording, with calibrated sequences saved to flash (FFat) so they survive restarts.</p>
+                        <img src="assets/project_6/web_ui.png" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;" alt="Web UI for servo control and motion recording">
+
+                        <h3>Chassis &mdash; Omnidirectional Drive:</h3>
+                        <p>The 37&times;34 cm chassis is laser cut from 6 mm MDF and driven by four 520 geared DC motors (1:60 gearbox, Hall-effect encoders, 730 ticks/rev) with 80 mm mecanum wheels. Holonomic motion lets the robot translate sideways and diagonally without turning, drastically reducing odometry error when docking against the ramp and hopper.</p>
+                        <img src="assets/project_6/chassis_front.png" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;" alt="Chassis front view showing 6cm ground clearance">
+                        <p>Motor speed is regulated by a closed-loop <strong>PID controller</strong> (Kp = 2.0, Ki = 0.8, Kd = 0.02) running on a 20 ms cycle with anti-windup and feedforward bias, on top of 20 kHz PWM with deadband compensation and a soft-launch ramp to prevent wheel slip. This keeps all four wheels at identical RPM &mdash; critical for accurate mecanum kinematics.</p>
+                        <img src="assets/project_6/pid_diagram.png" class="img-fluid" style="width: 100%; max-width: 600px; margin: 20px 0;" alt="PID closed loop control diagram for motor speed">
+                        <p>All electronics are soldered onto a custom proto-board for robustness, with separated power circuits: a 12V supply for the motors and an isolated battery pack for the ESP32 logic to protect it from voltage spikes.</p>
+                        <img src="assets/project_6/protoboard.jpg" class="img-fluid" style="width: 100%; max-width: 600px; margin: 20px 0;" alt="Custom soldered proto-board and electrical connections">
+
+                        <h3>Scissor Lift:</h3>
+                        <p>To reach the hopper without driving up the ramp, a scissor lift raises the 2.2 kg arm assembly. The first prototype was laser-cut 3 mm MDF, but friction and flex made it unreliable &mdash; the final version was 3D printed in <strong>PETG</strong> for its lower friction coefficient and higher strength.</p>
+                        <img src="assets/project_6/scissor_lift_prototype.png" class="img-fluid" style="width: 100%; max-width: 700px; margin: 20px 0;" alt="MDF scissor lift prototype, contracted and extended">
+                        <p>Two 100 mm / 188 N linear actuators driven by TB6612FNG motor drivers extend the lift, assisted by a spring mechanism that offloads the actuators at the low starting angles where the required force is highest. An MMA8452Q 3-axis tilt sensor detects uneven extension between the two sides so the controller can level the lift during operation.</p>
+                        <img src="assets/project_6/spring_mechanism.png" class="img-fluid" style="width: 100%; max-width: 400px; margin: 20px 0;" alt="Spring assist mechanism for the scissor lift">
+
+                        <h3>System Integration &mdash; ESP-NOW:</h3>
+                        <p>The three subsystems each run their own ESP32 and communicate wirelessly over <strong>ESP-NOW</strong> in a star topology: the chassis ESP32-WROOM-32 acts as the master, dispatching commands to the two LilyGo TTGO slaves controlling the lift and the arm. Replacing serial cables with low-latency 2.4 GHz messages eliminated cable fatigue and snagging between moving subsystems.</p>
+                        <img src="assets/project_6/espnow_pipeline.png" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;" alt="ESP-NOW communication pipeline between master and slave controllers">
+
+                        <h3>Results:</h3>
+                        <ul>
+                            <li><strong>6/6 rocks</strong> collected, retained, and deposited into the hopper in the best run.</li>
+                            <li><strong>Best run time: 73 seconds</strong> (well under the 120 second limit).</li>
+                            <li><strong>8 successful runs out of 10 trials</strong> after tuning lift timing, scoop motion, and setup position.</li>
+                            <li>Total system mass: <strong>5.1 kg</strong> &mdash; under the 6 kg limit. Total component cost: ~$477.</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-3 offset-md-1 meta">
+                        <div class="tags"><span class="meta-heading">Tags</span><a href="#">Robotics</a><a href="#">Project</a><span class="meta-heading">Date</span><span>13-11-2025</span></div>
+                    </div>
+                </div>
+                <div class="more-projects">
+                    <h3 class="text-center">More Projects</h3><img class="img-fluid scale-on-hover" src="assets/img/nature/image2.jpg"><img class="img-fluid scale-on-hover" src="assets/img/nature/image3.jpg"><img class="img-fluid scale-on-hover" src="assets/img/tech/image4.jpg"><img class="img-fluid scale-on-hover" src="assets/img/nature/image5.jpg"><img class="img-fluid scale-on-hover" src="assets/img/nature/image4.jpg">
+                    <div class="row gallery">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="item"><a href="#"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a></div>
+            <div class="social-icons"><a href="#"><i class="icon ion-social-linkedin"></i></a></div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

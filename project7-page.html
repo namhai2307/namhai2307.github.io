@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Project Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="#">TRAN HAI NAM</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects-grid-cards.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hire-me.html">My Journey</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page project-page">
+        <section class="portfolio-block project">
+            <div class="container">
+                <div class="heading">
+                    <h2>Master UR5 Arm &mdash; Controlling a Real UR5 over Wi-Fi</h2>
+                </div>
+                <div class="image" style="background-image:url(&quot;assets/project_7/ui_3d_model.jpg&quot;); background-position: center 40%;"></div>
+                <div class="row">
+                    <div class="col-12 col-lg-9 info">
+                        <h3>Description</h3>
+                        <p>A <strong>60%-scale, 3D-printed UR5 "teaching model"</strong> built by a team of 4 for the unit <strong>AUTO4507 Robot Manipulators and Automation</strong> at the University of Western Australia. Every joint of the scaled model contains a magnetic encoder, so when you move the model by hand, a <strong>TTGO ESP32</strong> reads all six joint angles and streams them over <strong>Wi-Fi</strong> to a real UR5 industrial robot &mdash; which mirrors the model's motion in real time. The device also records motion sequences that the UR5 can replay with joint (MoveJ) or linear (MoveL) moves.</p>
+                        <h3>The Challenge:</h3>
+                        <ul>
+                            <li><strong>6-DoF input device:</strong> Build a scaled model of a UR5 from 3D-printed parts, with a sensor on every axis.</li>
+                            <li><strong>On-device UI:</strong> Display joint angles, calculate the gripper TCP position via forward kinematics, and visualise the robot configuration graphically on the TTGO's TFT screen.</li>
+                            <li><strong>Real-time following:</strong> Link the TTGO to the UR5's router via Wi-Fi so the real robot copies the model's movements live.</li>
+                            <li><strong>Record &amp; playback:</strong> Record model poses and replay them on the real UR5 using joint or linear moves, selectable from the UI.</li>
+                            <li><strong>Budget:</strong> Maximum $40 for the whole build.</li>
+                        </ul>
+                        <h3>Robot Showcase:</h3>
+                        <video controls loop style="width: 100%; max-width: 500px;">
+                            <source src="assets/project_7/showcase.mp4" type="video/mp4">
+                            Your browser does not support this video.
+                        </video>
+
+                        <h3>CAD Design:</h3>
+                        <p>Instead of modelling the arm from scratch, the official UR5 STEP file from Universal Robots was scaled down to 60%, then <strong>hollowed out in SolidWorks</strong> to make room for the electronics. The joint mechanisms were drawn and extruded directly on top of the UR5-shaped solid &mdash; saving design time while keeping the model looking as close as possible to the real UR5.</p>
+                        <img src="assets/project_7/cad_ur5_model.jpg" class="img-fluid" style="width: 100%; max-width: 700px; margin: 20px 0;" alt="Official UR5 solid model downloaded from Universal Robots">
+                        <img src="assets/project_7/cad_hollowed.jpg" class="img-fluid" style="width: 100%; max-width: 400px; margin: 20px 0;" alt="Hollowed CAD design with joints and screw holes added">
+                        <p>The design brief for the joints: modular and repeatable, easy to 3D print with minimal supports, and easy to assemble with friction/press fits wherever possible. The joints slot into each other using <strong>connector pieces with designated grooves</strong> that allow discrete rotation, while 3D-printed mounts hold a diametric magnet exactly above each encoder chip so it rotates with the joint.</p>
+                        <img src="assets/project_7/joints_cad.jpg" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;" alt="CAD designs of the modular joints">
+                        <img src="assets/project_7/joint_connectors.jpg" class="img-fluid" style="width: 100%; max-width: 800px; margin: 20px 0;" alt="3D printed joint connector pieces">
+
+                        <h3>Electronics:</h3>
+                        <p>Each joint is sensed by an <strong>AS5600 12-bit contactless magnetic encoder</strong> (4096 positions per revolution &mdash; a theoretical resolution of 0.088&deg;). Unlike potentiometers, the magnetic encoders are frictionless and far less prone to noisy readings. Six encoders means twelve I2C lines, so a <strong>PCA9548A I2C multiplexer</strong> gives each encoder its own channel, letting the ESP32 scan all six joints sequentially over a single I2C bus.</p>
+                        <img src="assets/project_7/encoder_as5600.jpg" class="img-fluid" style="width: 100%; max-width: 350px; margin: 20px 10px 20px 0;" alt="AS5600 magnetic encoder board with diametric magnet">
+                        <img src="assets/project_7/multiplexer.jpg" class="img-fluid" style="width: 100%; max-width: 300px; margin: 20px 0;" alt="PCA9548A I2C multiplexer">
+                        <p>The multiplexer sits under the base of the arm with the SCL/SDA channel wires running up through the hollow arm to each encoder. The whole system is powered from a single USB-C cable into the TTGO, and the finished model anchors to the table with suction cups.</p>
+
+                        <h3>Software &mdash; Reading the Model:</h3>
+                        <p>The firmware converts raw encoder readings into joint coordinates with full validation: one retry per six-joint scan on I2C faults, 0&deg;/360&deg; wrap-around handling, and a jump filter that rejects changes above 30&deg; as probable read errors (holding the last valid value instead). Reference positions and waypoints are only ever captured from fresh, valid readings. The same validated joint angles feed every function &mdash; Sensors display, Follow, Sequence and the 3D visualisation &mdash; so all modes stay consistent.</p>
+                        <div class="overflow-auto my-3">
+                            <math display="block" aria-label="Joint angle equals the home angle plus the sensor direction times the wrapped difference between the encoder angle and its reference">
+                                <msub><mi>q</mi><mi>i</mi></msub><mo>=</mo>
+                                <msub><mi>q</mi><mrow><mi>home</mi><mo>,</mo><mi>i</mi></mrow></msub><mo>+</mo>
+                                <msub><mi>s</mi><mi>i</mi></msub>
+                                <msub><mi>wrap</mi><mrow><mo>[</mo><mo>&minus;</mo><mn>180</mn><mo>&deg;</mo><mo>,</mo><mn>180</mn><mo>&deg;</mo><mo>)</mo></mrow></msub>
+                                <mo>(</mo><msub><mi>&theta;</mi><mi>i</mi></msub><mo>&minus;</mo><msub><mi>&theta;</mi><mrow><mi>ref</mi><mo>,</mo><mi>i</mi></mrow></msub><mo>)</mo>
+                            </math>
+                        </div>
+                        <p>Here, &theta; is the encoder angle, &theta;<sub>ref</sub> is its reference, and s is the sensor mounting direction. Wrapping the difference handles the encoder's 0&deg;/360&deg; boundary.</p>
+
+                        <h3>Software &mdash; Real-Time Following:</h3>
+                        <p>The ESP32 connects to the UR5 over Wi-Fi, sending <strong>URScript</strong> programs and receiving robot-state feedback (joint positions, speeds, TCP pose and tool offset). In Follow mode, joint targets stream through a reverse TCP connection on port 50001 every ~20 ms, while a URScript servo loop on the robot runs every 8 ms. Each update is velocity-clipped, with a 0.5&deg; deadband to suppress encoder jitter and robot-side limits of ~22.9&deg;/s and 57.3&deg;/s&sup2;. Following only starts from valid data with the robot stationary, begins at the robot's actual pose and converges smoothly to the model &mdash; and it automatically stops on stale feedback, joint-limit violations, or a command-to-actual error above 30&deg;, with automatic reconnection once conditions are safe again.</p>
+                        <p><small>Click a software or interface image to view it full size.</small></p>
+                        <div class="row g-2 my-3">
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_sensors.jpg" target="_blank" rel="noopener" aria-label="Open full-size sensor readings image"><img src="assets/project_7/ui_sensors.jpg" class="img-fluid w-100" alt="Live sensor readings for each joint"></a></div>
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_follow.jpg" target="_blank" rel="noopener" aria-label="Open full-size Follow screen image"><img src="assets/project_7/ui_follow.jpg" class="img-fluid w-100" alt="Follow control screen on the TTGO"></a></div>
+                        </div>
+
+                        <h3>Software &mdash; FK, 3D Visualisation &amp; Sequences:</h3>
+                        <p>Nominal UR5 forward kinematics computes the model's TCP position in millimetres relative to the robot base, displayed side-by-side with the real UR5's actual TCP for comparison. A <strong>3D render of the UR5</strong> is drawn into a sprite buffer and pushed to the TFT each frame, animating the model's configuration live.</p>
+                        <div class="overflow-auto my-3">
+                            <math display="block" aria-label="TCP position equals flange position plus flange rotation times the tool offset">
+                                <msub><mi>p</mi><mi>TCP</mi></msub><mo>=</mo>
+                                <msub><mi>p</mi><mi>flange</mi></msub><mo>+</mo>
+                                <msub><mi>R</mi><mi>flange</mi></msub>
+                                <msub><mi>p</mi><mi>tool</mi></msub>
+                            </math>
+                        </div>
+                        <p>The joint angles determine the flange position p<sub>flange</sub> and rotation R<sub>flange</sub>; p<sub>tool</sub> is the active tool offset from the flange to the TCP.</p>
+                        <div class="row g-2 my-3">
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_fk_tcp.jpg" target="_blank" rel="noopener" aria-label="Open full-size FK and TCP screen image"><img src="assets/project_7/ui_fk_tcp.jpg" class="img-fluid w-100" alt="FK / TCP comparison screen"></a></div>
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_3d_model.jpg" target="_blank" rel="noopener" aria-label="Open full-size 3D visualisation image"><img src="assets/project_7/ui_3d_model.jpg" class="img-fluid w-100" alt="Live 3D visualisation of the arm on the TTGO display"></a></div>
+                        </div>
+                        <p>The Sequence function stores up to <strong>32 poses in non-volatile memory</strong> (six joint angles + tool offset each). Playback generates a URScript program on the fly: MoveJ uses the stored joint angles directly, while MoveL computes target TCP poses from the recorded angles and tool offset. The robot settles and verifies each waypoint (&lt;0.01 rad joint error for MoveJ; &lt;2 mm / 0.01 rad for MoveL) before advancing, with progress and heartbeat messages exchanged over reverse TCP port 50002.</p>
+                        <div class="row g-2 my-3">
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_sequence.jpg" target="_blank" rel="noopener" aria-label="Open full-size Sequence screen image"><img src="assets/project_7/ui_sequence.jpg" class="img-fluid w-100" alt="Sequence record and playback screen"></a></div>
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_ur5_joints.jpg" target="_blank" rel="noopener" aria-label="Open full-size UR5 joint readings image"><img src="assets/project_7/ui_ur5_joints.jpg" class="img-fluid w-100" alt="UR5 joint readings screen"></a></div>
+                        </div>
+
+                        <h3>User Interface:</h3>
+                        <p>The control panel is a joystick for menu navigation plus two buttons: <strong>Button 1</strong> toggles the UR5's gripper open/closed and <strong>Button 2</strong> establishes the Wi-Fi link to the robot. The main menu gives access to all six functions: Sensors, FK/TCP, Follow, UR5 Joints, 3D Model and Sequence.</p>
+                        <div class="row g-2 my-3">
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/control_panel.jpg" target="_blank" rel="noopener" aria-label="Open full-size control panel image"><img src="assets/project_7/control_panel.jpg" class="img-fluid w-100" alt="Control panel with joystick and two buttons"></a></div>
+                            <div class="col-12 col-sm-6"><a href="assets/project_7/ui_main_menu.jpg" target="_blank" rel="noopener" aria-label="Open full-size main menu image"><img src="assets/project_7/ui_main_menu.jpg" class="img-fluid w-100" alt="Main menu on the TTGO display"></a></div>
+                        </div>
+
+                        <h3>Results:</h3>
+                        <ul>
+                            <li><strong>Real-time following:</strong> the real UR5 smoothly mirrors the hand-moved model over Wi-Fi.</li>
+                            <li><strong>Full feature set delivered:</strong> joint display, FK/TCP, on-screen 3D visualisation, gripper control, and record &amp; playback with selectable joint/linear moves.</li>
+                            <li><strong>Robust by design:</strong> encoder validation, velocity clipping, watchdog timeouts and automatic recovery protect the real robot.</li>
+                            <li><strong>Total build cost: $39.50</strong> &mdash; just under the $40 budget.</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-3 meta">
+                        <div class="tags"><span class="meta-heading">Tags</span><a href="#">Robotics</a><a href="#">Project</a><span class="meta-heading">Date</span><span>15-10-2025</span></div>
+                    </div>
+                </div>
+                <div class="more-projects">
+                    <h3 class="text-center">More Projects</h3>
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 gallery">
+                        <div class="col"><a class="d-block" href="project6-page.html"><img class="img-fluid scale-on-hover mb-2" src="assets/image material/warman_weir.png" alt="Weir Warman competition" loading="lazy"><span>2026 Weir Warman Competition Robot</span></a></div>
+                        <div class="col"><a class="d-block" href="project5-page.html"><img class="img-fluid scale-on-hover mb-2" src="assets/image material/sumo_bot.jpg" alt="Autonomous sumo robot" loading="lazy"><span>Autonomous Sumo Robot</span></a></div>
+                        <div class="col"><a class="d-block" href="project4-page.html"><img class="img-fluid scale-on-hover mb-2" src="assets/image material/weather station prj.png" alt="IoT weather station" loading="lazy"><span>IoT Weather Station with AI</span></a></div>
+                        <div class="col"><a class="d-block" href="project3-page.html"><img class="img-fluid scale-on-hover mb-2" src="assets/project_3/makex.jpg" alt="MakeX competition robot" loading="lazy"><span>Disc Collecting and Cube Organizing Robot</span></a></div>
+                        <div class="col"><a class="d-block" href="project2-page.html"><img class="img-fluid scale-on-hover mb-2" src="assets/image material/python_prj.png" alt="Python job scraping project" loading="lazy"><span>Automated Python Jobs Scraping Bot</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a></div>
+            <div class="social-icons"><a href="#"><i class="icon ion-social-linkedin"></i></a></div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
